@@ -8,6 +8,7 @@
     ../profiles/rust.nix
     ../profiles/go.nix
     ../profiles/editor.nix
+    ../profiles/misc.nix
   ];
 
   home = {

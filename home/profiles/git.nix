@@ -15,7 +15,7 @@ in
     git = {
       enable = true;
 
-      extraConfig = {
+      settings = {
         user = {
           name = "Emilio Toledo";
           email = "github@emiliotoledo.me";

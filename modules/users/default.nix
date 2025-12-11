@@ -51,6 +51,12 @@ in
               default = true;
               description = "Whether this is a normal user account";
             };
+
+            homeConfig = mkOption {
+              type = types.nullOr types.path;
+              default = null;
+              description = "Path to home-manager configuration for this user";
+            };
           };
         }
       );
@@ -87,5 +93,9 @@ in
         filter (n: cfg.users.${n}.enable && !cfg.users.${n}.isNormalUser) (attrNames cfg.users)
       )
     );
+
+    home-manager.users = mapAttrs (
+      name: userCfg: if userCfg.homeConfig != null then import userCfg.homeConfig else { }
+    ) (filterAttrs (n: v: v.enable && v.homeConfig != null) cfg.users);
   };
 }

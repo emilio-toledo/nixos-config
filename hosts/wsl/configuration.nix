@@ -6,6 +6,7 @@
   config,
   lib,
   pkgs,
+  nixos-wsl,
   ...
 }:
 
@@ -14,4 +15,20 @@
   # For example:
   # networking.hostName = "wsl-machine";
   # time.timeZone = "America/New_York";
+  imports = [
+    ../../modules/wsl/wsl.nix
+  ];
+
+  customUsers = {
+    enable = true;
+    users.nixos = {
+      shell = pkgs.fish;
+      extraGroups = [
+        "docker"
+        "wheel"
+      ];
+      secretFile = ../../secrets/secret-nixos.age;
+      homeConfig = ../../home/emilio/home.nix;
+    };
+  };
 }
