@@ -32,17 +32,15 @@
             nixos-wsl.nixosModules.default
             ragenix.nixosModules.default
             home-manager.nixosModules.home-manager
-            ./hosts/wsl/configuration.nix
-            ./modules/wsl/wsl.nix
             ./modules/common/packages.nix
             ./modules/common/programs.nix
             ./modules/common/security.nix
             ./modules/services/openssh.nix
-            ./modules/users/nixos.nix
+            ./modules/users/default.nix
+            ./hosts/wsl/configuration.nix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.nixos = import ./home/emilio/home.nix;
             }
             {
               nix.settings.experimental-features = [
