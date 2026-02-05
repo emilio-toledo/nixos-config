@@ -47,9 +47,19 @@
                 "nix-command"
                 "flakes"
               ];
+              # Auto-register this flake
+              nix.registry.nixos-config.flake = self;
             }
           ];
         };
+      };
+
+      templates = {
+        node = {
+          path = ./templates/node;
+          description = "Playwright development environment with Node.js, pnpm, bun, and moon";
+        };
+        default = self.templates.node;
       };
     };
 }
