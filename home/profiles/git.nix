@@ -18,7 +18,7 @@ in
       settings = {
         user = {
           name = "Emilio Toledo";
-          email = "github@emiliotoledo.me";
+          email = "github@emiliotoledo.com";
           signingkey = sshKeyPath;
         };
 
@@ -45,7 +45,7 @@ in
       settings = {
         user = {
           name = "Emilio Toledo";
-          email = "github@emiliotoledo.me";
+          email = "github@emiliotoledo.com";
         };
 
         signing = {

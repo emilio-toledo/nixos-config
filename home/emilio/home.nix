@@ -9,6 +9,7 @@
     ../profiles/go.nix
     ../profiles/editor.nix
     ../profiles/misc.nix
+    ../profiles/node.nix
   ];
 
   home = {
