@@ -27,7 +27,7 @@
         "docker"
         "wheel"
       ];
-      secretFile = ../../secrets/secret-nixos.age;
+      secretFile = ../../modules/secrets/secret-nixos.age;
       homeConfig = ../../home/emilio/home.nix;
     };
   };
