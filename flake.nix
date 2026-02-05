@@ -54,12 +54,6 @@
         };
       };
 
-      templates = {
-        node = {
-          path = ./templates/node;
-          description = "Playwright development environment with Node.js, pnpm, bun, and moon";
-        };
-        default = self.templates.node;
-      };
+      templates = import ./modules/templates/templates.nix;
     };
 }
