@@ -38,6 +38,7 @@
             ./modules/services/openssh.nix
             ./modules/users/default.nix
             ./hosts/wsl/configuration.nix
+            ./hosts/wsl/hardware-configuration.nix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

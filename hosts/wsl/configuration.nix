@@ -19,6 +19,8 @@
     ../../modules/wsl/wsl.nix
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   customUsers = {
     enable = true;
     users.nixos = {
@@ -28,7 +30,7 @@
         "wheel"
       ];
       secretFile = ../../modules/secrets/secret-nixos.age;
-      homeConfig = ../../home/emilio/home.nix;
+      homeConfig = ../../home/nixos.nix;
     };
   };
 }
