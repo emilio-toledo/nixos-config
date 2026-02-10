@@ -48,6 +48,9 @@ in
           email = "github@emiliotoledo.com";
         };
 
+        revset-aliases = {
+          "trunk()" = "dev@origin";
+        };
         signing = {
           behavior = "own";
           backend = "ssh";
