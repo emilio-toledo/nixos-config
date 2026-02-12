@@ -16,4 +16,10 @@
       { src = "${coreutils}/bin/uname"; }
     ];
   };
+
+  systemd.tmpfiles.rules = [
+    "d /run/user/1000 0700 nixos root -"
+  ];
+
+  users.users.nixos.linger = true;
 }
