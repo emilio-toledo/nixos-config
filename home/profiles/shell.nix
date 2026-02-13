@@ -16,9 +16,7 @@
 
         fish_config theme choose "fish default"
       '';
-      interactiveShellInit = ''
-        pfetch
-      '';
+      interactiveShellInit = '''';
     };
 
     starship = {

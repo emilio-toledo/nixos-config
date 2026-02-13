@@ -30,6 +30,13 @@ in
         commit = {
           gpgSign = true;
         };
+
+      };
+
+      extraConfig = {
+        init = {
+          defaultBranch = "dev";
+        };
       };
     };
 
