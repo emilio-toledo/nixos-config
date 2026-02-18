@@ -1,10 +1,7 @@
 {
   config,
-  pkgs,
-  lib,
   ...
 }:
-
 let
   sshKeyPath = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
   allowedSignersPath = "${config.home.homeDirectory}/.ssh/allowed_signers";
@@ -31,9 +28,6 @@ in
           gpgSign = true;
         };
 
-      };
-
-      extraConfig = {
         init = {
           defaultBranch = "dev";
         };

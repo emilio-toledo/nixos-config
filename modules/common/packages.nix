@@ -1,8 +1,11 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     wget
     nixfmt
-    fish
+    nil
   ];
 }

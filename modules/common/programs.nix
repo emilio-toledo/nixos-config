@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 {
   programs = {
-    ssh.startAgent = true;
-    fish.enable = true;
     nix-ld = {
       enable = true;
+
       libraries = with pkgs; [
         # Chromium / Puppeteer runtime dependencies
         glib
@@ -33,6 +35,9 @@
         libxkbcommon
       ];
     };
+
+    fish.enable = true;
+
     direnv.enable = true;
   };
 }

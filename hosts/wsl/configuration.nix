@@ -3,13 +3,9 @@
 # Common configuration is in the root flake.nix
 
 {
-  config,
-  lib,
   pkgs,
-  nixos-wsl,
   ...
 }:
-
 {
   # Host-specific settings can go here
   # For example:

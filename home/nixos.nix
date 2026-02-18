@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
 
   home = {
@@ -9,15 +7,15 @@
   };
 
   imports = [
-    ./profiles/development.nix
     ./profiles/shell.nix
     ./profiles/git.nix
+    ./profiles/development.nix
     ./profiles/rust.nix
-    ./profiles/go.nix
     ./profiles/editor.nix
-    ./profiles/misc.nix
-    ./profiles/node.nix
-    ./profiles/ai.nix
+    #./profiles/go.nix
+    #./profiles/misc.nix
+    #./profiles/node.nix
+    #./profiles/ai.nix
   ];
 
   programs.home-manager = {

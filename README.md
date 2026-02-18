@@ -40,6 +40,7 @@ Modular NixOS configuration system designed for easy multi-machine management.
 ### Option 1: Copy and Customize Template
 
 1. Copy the template directory:
+
    ```bash
    cp -r hosts/_template hosts/my-hostname
    ```
@@ -47,6 +48,7 @@ Modular NixOS configuration system designed for easy multi-machine management.
 2. Edit `hosts/my-hostname/configuration.nix` with host-specific settings
 
 3. For physical machines, generate hardware config:
+
    ```bash
    nixos-generate-config --show-hardware-config > hosts/my-hostname/hardware-configuration.nix
    ```
@@ -54,6 +56,7 @@ Modular NixOS configuration system designed for easy multi-machine management.
 4. Add to `flake.nix` nixosConfigurations (see template README for example)
 
 5. Create secrets if using password authentication:
+
    ```bash
    # Create secret file
    nix run github:yaxitech/ragenix -- -e secrets/secret-myuser.age
@@ -62,6 +65,7 @@ Modular NixOS configuration system designed for easy multi-machine management.
    ```
 
 6. Build and activate:
+
    ```bash
    nixos-rebuild switch --flake .#my-hostname
    ```
@@ -92,11 +96,13 @@ my-hostname = nixpkgs.lib.nixosSystem {
 ## Module System
 
 ### Common Modules
+
 - `modules/common/packages.nix` - Essential system packages
 - `modules/common/programs.nix` - Fish, direnv, SSH agent, nix-ld
 - `modules/common/security.nix` - Sudo configuration
 
 ### User Management
+
 The `customUsers` system (`modules/users/default.nix`) provides flexible user configuration:
 
 ```nix
@@ -112,7 +118,9 @@ customUsers = {
 ```
 
 ### Home-Manager Profiles
+
 Reusable home-manager configurations in `home/profiles/`:
+
 - `development.nix` - Common dev tools (pfetch-rs, gcc)
 - `shell.nix` - Shell setup (fish, starship, zoxide, fzf)
 - `git.nix` - Git with SSH signing, gh, jujutsu
@@ -121,6 +129,7 @@ Reusable home-manager configurations in `home/profiles/`:
 - `editor.nix` - Neovim configuration
 
 Import them in your home.nix:
+
 ```nix
 {
   imports = [
@@ -133,22 +142,26 @@ Import them in your home.nix:
 
 ## Building and Deployment
 
-### Local rebuild:
+### Local rebuild
+
 ```bash
 sudo nixos-rebuild switch --flake .#hostname
 ```
 
-### Build without activation:
+### Build without activation
+
 ```bash
 nixos-rebuild build --flake .#hostname
 ```
 
-### Update flake inputs:
+### Update flake inputs
+
 ```bash
 nix flake update
 ```
 
-### Check flake:
+### Check flake
+
 ```bash
 nix flake check
 ```
@@ -159,14 +172,17 @@ This configuration uses [ragenix](https://github.com/yaxitech/ragenix) for age-e
 
 1. Add your SSH keys to `modules/secrets/secrets.nix`
 2. Create/edit secrets:
+
    ```bash
    nix run github:yaxitech/ragenix -- -e secrets/secret-name.age
    ```
+
 3. Reference in user configuration via `secretFile` option
 
 ## WSL Configuration
 
 The WSL machine includes:
+
 - `nixos-wsl.nixosModules.default` - NixOS-WSL integration
 - `modules/wsl/wsl.nix` - WSL-specific settings
 

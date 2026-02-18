@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 {
   system.stateVersion = "25.05";
 

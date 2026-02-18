@@ -1,11 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
-  # Shell configuration profile (fish, starship, zoxide, fzf)
   programs = {
     fish = {
       enable = true;

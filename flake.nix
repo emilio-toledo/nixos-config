@@ -4,9 +4,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    ragenix.url = "github:yaxitech/ragenix";
+    ragenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -18,6 +25,7 @@
       nixos-wsl,
       ragenix,
       home-manager,
+      rust-overlay,
     }:
     let
       system = "x86_64-linux";
@@ -40,8 +48,12 @@
             ./hosts/wsl/configuration.nix
             ./hosts/wsl/hardware-configuration.nix
             {
+              nixpkgs.overlays = [ rust-overlay.overlays.default ];
+            }
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "bak";
             }
             {
               nix.settings.experimental-features = [
