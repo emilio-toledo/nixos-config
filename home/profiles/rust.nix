@@ -3,8 +3,14 @@
   ...
 }:
 {
-  home.packages = with pkgs; [
-    rust-bin.stable.latest.default
-    rust-analyzer
+  home.packages = [
+    (pkgs.rust-bin.stable.latest.default.override {
+      extensions = [
+        "rust-src"
+        "rust-analyzer"
+      ];
+    })
+
+    pkgs.cargo-watch
   ];
 }
