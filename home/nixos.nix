@@ -12,10 +12,8 @@
     ./profiles/development.nix
     ./profiles/rust.nix
     ./profiles/editor.nix
-    #./profiles/go.nix
-    #./profiles/misc.nix
-    #./profiles/node.nix
-    #./profiles/ai.nix
+    ./profiles/ai.nix
+    ./profiles/python.nix
   ];
 
   programs.home-manager = {

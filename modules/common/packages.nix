@@ -6,6 +6,6 @@
   environment.systemPackages = with pkgs; [
     wget
     nixfmt
-    nil
+    nixd
   ];
 }

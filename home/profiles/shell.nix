@@ -3,13 +3,10 @@
     fish = {
       enable = true;
       shellInit = ''
-        fish_add_path "~/.proto/bin"
-        fish_add_path "/mnt/c/Users/micro/scoop/apps/vscode-insiders/current/bin"
         set -g fish_greeting ""
 
         fish_config theme choose "fish default"
       '';
-      interactiveShellInit = '''';
     };
 
     starship = {

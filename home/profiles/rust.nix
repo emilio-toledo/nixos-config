@@ -25,6 +25,8 @@
     SCCACHE_SERVER_UDS = "/run/user/1000/sccache.sock";
   };
 
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
+
   home.packages = [
     (pkgs.rust-bin.nightly.latest.default.override {
       extensions = [
