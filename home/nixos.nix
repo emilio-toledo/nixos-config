@@ -14,6 +14,7 @@
     ./profiles/editor.nix
     ./profiles/ai.nix
     ./profiles/python.nix
+    ./profiles/node.nix
   ];
 
   programs.home-manager = {

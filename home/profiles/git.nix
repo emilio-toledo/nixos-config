@@ -7,7 +7,6 @@ let
   allowedSignersPath = "${config.home.homeDirectory}/.ssh/allowed_signers";
 in
 {
-  # Git and related VCS tools configuration
   programs = {
     git = {
       enable = true;

@@ -7,6 +7,9 @@
 
         fish_config theme choose "fish default"
       '';
+      interactiveShellInit = ''
+        promo-cli init fish | source
+      '';
     };
 
     starship = {

@@ -17,6 +17,20 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Sandboxed NixOS container for running agentic CLI tools in bypass mode
+  sandbox = {
+    enable = true;
+    hostDirectory = "/home/nixos/sandbox";
+    # Network access enabled so agents can fetch dependencies, call APIs, etc.
+    privateNetwork = false;
+    extraPackages = with pkgs; [
+      claude-code
+      nodejs
+      python3
+      uv
+    ];
+  };
+
   customUsers = {
     enable = true;
     users.nixos = {

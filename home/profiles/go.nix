@@ -2,7 +2,6 @@
   pkgs,
 }:
 {
-  # Go development tools
   programs.go = {
     enable = true;
   };
