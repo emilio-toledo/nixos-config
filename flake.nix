@@ -44,6 +44,7 @@
             ./modules/common/programs.nix
             ./modules/common/security.nix
             ./modules/services/openssh.nix
+            ./modules/containers/sandbox.nix
             ./modules/users/default.nix
             ./hosts/wsl/configuration.nix
             ./hosts/wsl/hardware-configuration.nix
