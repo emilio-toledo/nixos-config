@@ -184,15 +184,27 @@ in
             useHostResolvConf = mkForce true;
           };
 
-          environment.systemPackages = [
-            pkgs.claude-code
-            pkgs.git
-            pkgs.rustup
-            pkgs.mold
-            pkgs.sccache
-            pkgs.gcc
-          ]
-          ++ cfg.extraPackages;
+          environment.systemPackages =
+            with pkgs;
+            [
+              claude-code
+              git
+              rustup
+              mold
+              sccache
+              gcc
+              python313
+              python315
+              uv
+              openssl
+              openssl.dev
+              gnumake
+              pkg-config
+              nodejs
+              pnpm
+              jujutsu
+            ]
+            ++ cfg.extraPackages;
 
           programs.fish.enable = true;
 
@@ -211,10 +223,19 @@ in
             CARGO_TARGET_DIR = "target/sandbox";
             RUSTC_WRAPPER = "${sccacheWrapper}";
             SCCACHE_SERVER_UDS = "/tmp/sccache.sock";
+            PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+            LD_LIBRARY_PATH = lib.makeLibraryPath [
+              pkgs.stdenv.cc.cc.lib
+            ];
           };
 
           environment.extraInit = ''
-            export PATH="$CARGO_HOME/bin:$PATH"
+            export PATH="/home/sandbox/.venvs/default/bin:$CARGO_HOME/bin:$PATH"
+          '';
+
+          # Add venv + cargo to fish PATH (fish doesn't source /etc/profile)
+          programs.fish.shellInit = ''
+            fish_add_path --prepend /home/sandbox/.venvs/default/bin $CARGO_HOME/bin
           '';
 
           # Start in /workspace on login
@@ -222,8 +243,36 @@ in
             cd /workspace 2>/dev/null; or true
           '';
 
-          # Required for rustup-installed binaries (standard ELFs need a dynamic linker)
+          # Required for rustup-installed binaries and PyPI native extensions
           programs.nix-ld.enable = true;
+          programs.nix-ld.libraries = [
+            pkgs.stdenv.cc.cc.lib # libstdc++.so.6
+          ];
+
+          # Install PyPI packages into a persistent venv (home is bind-mounted)
+          systemd.services.python-venv-setup = {
+            description = "Set up Python virtual environment with PyPI packages";
+            wantedBy = [ "multi-user.target" ];
+            after = [ "network-online.target" ];
+            wants = [ "network-online.target" ];
+            path = [
+              pkgs.uv
+              pkgs.python313
+            ];
+            serviceConfig = {
+              Type = "oneshot";
+              User = "sandbox";
+              Group = "users";
+              ExecStart = pkgs.writeShellScript "setup-python-venv" ''
+                set -euo pipefail
+                VENV="/home/sandbox/.venvs/default"
+                rm -rf "$VENV"
+                ${pkgs.uv}/bin/uv venv "$VENV" --python ${pkgs.python313}/bin/python
+                ${pkgs.uv}/bin/uv pip install --python "$VENV/bin/python" \
+                   claude-agent-sdk ouroboros-ai[claude]
+              '';
+            };
+          };
 
           # Pre-start sccache server (auto-daemonization fails inside nspawn)
           systemd.services.sccache = {

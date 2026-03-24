@@ -3,7 +3,7 @@
   home = {
     username = "nixos";
     homeDirectory = "/home/nixos";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
   };
 
   imports = [
@@ -15,6 +15,7 @@
     ./profiles/ai.nix
     ./profiles/python.nix
     ./profiles/node.nix
+    ./profiles/cloud.nix
   ];
 
   programs.home-manager = {
